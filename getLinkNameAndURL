@@ -1,0 +1,27 @@
+package webelementz;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
+public class LinkNameAndURL {
+	public static void main(String[] args) {
+		WebDriver driver = new FirefoxDriver();
+		driver.get("http://www.bing.com/");
+		List<WebElement> linkz = driver.findElements(By.tagName("a"));
+		for (int i = 0; i < linkz.size(); i++) {   				// loops for all the links
+
+			if (linkz.get(i).isDisplayed()) {     				// if the link is displayed
+				String name = linkz.get(i).getText(); 			// get the name / text of the link
+				linkz.get(i).click(); 							// click the link
+				String url = driver.getCurrentUrl();			// nevigate to the link clicked and get URL
+				driver.navigate().back();						// navigate to the homepage
+				System.out.println(name + " : " + url);			// print name of the link and url for a particular index position
+			linkz = driver.findElements(By.tagName("a"));		// to start over from the beginning of the linkz
+			}
+		}
+	}
+}
