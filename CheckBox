@@ -1,0 +1,40 @@
+package webelementz;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
+public class CheckBox {
+
+	public static void main(String[] args) {
+
+		WebDriver driver = new FirefoxDriver();
+		driver.get("http://www.spicejet.com/");
+
+		WebElement student = driver.findElement(By.id("ctl00_mainContent_chk_StudentDiscount"));
+		if (student.isSelected()) {
+			System.out.println("Student checkbox is selected");
+		} else {
+			System.out.println("Student checkbox is NOT selected");
+
+		}
+
+		List<WebElement> checkboxes = driver.findElements(By.xpath("//input[@type='checkbox']"));
+		System.out.println(checkboxes.size());
+
+		for (int i = 0; i < checkboxes.size(); i++) {
+			System.out.println(checkboxes.get(i).getAttribute("name"));
+		}
+
+		for (int j = 0; j < checkboxes.size(); j++) {
+			String name = checkboxes.get(j).getAttribute("name");
+			if (!checkboxes.get(j).isSelected()) {
+				System.out.println(name + " : is NOT Selected . .  .. . ");
+			}
+		}
+
+	}
+}
